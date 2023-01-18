@@ -1,0 +1,24 @@
+{
+  "name": "challenge-nodejs",
+  "version": "1.0.0",
+  "description": "Realizar un script que liste todos mis repositorios publicos de GitHub empleando Node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JulSarmiento/practice-node.js.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JulSarmiento/practice-node.js/issues"
+  },
+  "homepage": "https://github.com/JulSarmiento/practice-node.js#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "octokit": "^2.0.11"
+  }
+}
