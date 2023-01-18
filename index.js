@@ -14,12 +14,15 @@ const octokit = new Octokit({
  * @param {string} username
  */
 const repos = async () => {
-  const data = await octokit.request(`GET /users/${process.env.GITHUB_USERNAME}/repos`, {username: `${process.env.GITHUB_USERNAME}`});
+  const data = await octokit.request(
+    `GET /users/${process.env.GITHUB_USERNAME}/repos`,
+    { username: `${process.env.GITHUB_USERNAME}` }
+  );
   const repos = Object.entries(data.data).map((repo) => {
     return repo[1].name;
   });
 
-  console.table(repos)
-}
+  console.table(repos);
+};
 
 repos();
