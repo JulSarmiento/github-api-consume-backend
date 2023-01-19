@@ -1,10 +1,21 @@
 require("dotenv").config();
 const { Octokit } = require("octokit");
 
+/**
+ * @param {string} token
+ * @returns {Octokit}
+ * @see https://octokit.github.io/rest.js/v18#authentication
+ */
 const octokit = new Octokit({
   auth: process.env.GITHUB_TOKEN,
 });
 
+/**
+ * @param {string} owner
+ * @param {string} repo
+ * @returns {Promise<import("@octokit/types").Octokit.PullsListResponseItem[]>}
+ * @see https://octokit.github.io/rest.js/v18#pulls-list
+ */
 const repos = async () => {
   const {data} = await octokit.request(
     `GET /users/${process.env.GITHUB_USERNAME}/repos`,
@@ -26,6 +37,9 @@ const repos = async () => {
   console.table(transformedRepos);
 };
 repos();
+
+
+
 
 
 
