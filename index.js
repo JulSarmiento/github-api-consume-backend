@@ -1,28 +1,34 @@
-const { Octokit, App } = require("octokit");
 require("dotenv").config();
+const { Octokit } = require("octokit");
 
-/**
- * @param {string} username
- * @returns {Promise<string[]>}
- */
 const octokit = new Octokit({
   auth: process.env.GITHUB_TOKEN,
 });
 
-/**
- * @returns {Promise<string[]>}
- * @param {string} username
- */
 const repos = async () => {
-  const data = await octokit.request(
+  const {data} = await octokit.request(
     `GET /users/${process.env.GITHUB_USERNAME}/repos`,
     { username: `${process.env.GITHUB_USERNAME}` }
   );
-  const repos = Object.entries(data.data).map((repo) => {
-    return repo[1].name;
-  });
 
-  console.table(repos);
+  const transformedRepos = data.reduce((acc, repo) => {
+    const { name, description, language, ssh_url, clone_url } = repo;
+    acc[name] = {
+      "Description": description || "N/A",
+      "Language": language || "N/A",
+      "SSH link": ssh_url,
+      "Clone link": clone_url,
+    };
+
+    return acc;
+  }, {});
+
+  console.table(transformedRepos);
 };
-
 repos();
+
+
+
+
+
+
